@@ -2,6 +2,8 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\VerifyAccessToken;
+use App\Http\Middleware\ViewCount;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -61,6 +63,8 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'count' => ViewCount::class,            //统计访问次数
+        'verifyaccesstoken' => VerifyAccessToken::class,            //检查accesstoken
     ];
 
     /**
