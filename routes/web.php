@@ -12,8 +12,19 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+	 return view('welcome');
 });
 ////
-Route::get('/wx/token','TestController@getWxToken');
-Route::get('/wx/token2','TestController@getWxToken2');
+Route::get('/test1','TestController@test1');
+Route::get('/test2','TestController@test2');
+
+////对称加密
+//解密
+Route::get('/dec2','TestController@dec2');
+////非对称加密
+//解密
+Route::get('/rsa2','TestController@rsa2');
+//加密
+Route::get('/rsa11','TestController@rsa11');
+//签名测试
+Route::get('/sign2','TestController@sign2');
