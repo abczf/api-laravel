@@ -4,38 +4,56 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+<<<<<<< HEAD
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Str;
 use App\Model\GoodsModel;
+=======
+>>>>>>> 6d24dacb02748014c31917a89ad51a356ff16e9b
 class TestController extends Controller
 {
-    ///111
-    public function getWxToken(){
-        $appid="wx1f21d2a459d9c0bb";
-        $secret="b6be8724084245c2ff8b9011bbfec441";
-        $url="https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=$appid&secret=$secret";
-        $content=file_get_contents($url);
-        echo $content;
+    //
+    public function test1(){
+        $url='http://www.1911.com/user/info';
+        $response=file_get_contents($url);
+        var_dump($response);
     }
-    ///222
-    public function getWxToken2(){
-        $appid="wx1f21d2a459d9c0bb";
-        $secret="b6be8724084245c2ff8b9011bbfec441";
-        $url="https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=$appid&secret=$secret";
-        // 创建一个新cURL资源
-        $ch = curl_init();
-
-        // 设置URL和相应的选项
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
-        // 抓取URL并把它传递给浏览器
-        $response=curl_exec($ch);
-
-        // 关闭cURL资源，并且释放系统资源
-        curl_close($ch);
-        echo $response;
+    //
+    public function test2(){
+        echo "test2";
     }
+
+    //////对称加密
+    //解密
+    public function dec2(){
+        $enc_date=base64_decode(request()->get("data"));
+        $method="AES-256-CBC";      //加密算法
+        $key="001";     //加密密钥
+        $iv='1111222233334444';     //初始化$iv，cbc加密算法使用
+        $dec_data=openssl_decrypt($enc_date,$method,$key,OPENSSL_RAW_DATA,$iv);
+        echo $dec_data;
+    }
+    //////非对称加密
+    //解密
+    public function rsa2(){
+        $enc_date=base64_decode(request()->get("data"));
+        $connect=file_get_contents(storage_path('keys/www_priv.key'));
+        $priv_key=openssl_get_privatekey($connect);
+        openssl_private_decrypt($enc_date,$dec_data,$priv_key);
+        echo $dec_data;
+    }
+    //加密
+    public function rsa11(){
+        $data="吧嗒吧嗒";
+        $connect=file_get_contents(storage_path('keys/api_pub.key'));
+        $pub_key=openssl_get_publickey($connect);
+        openssl_public_encrypt($data,$enc_data,$pub_key);
+        $b64_str=base64_encode($enc_data);
+        $url='http://www.1911.com/rsa21?data='.urlencode($b64_str);
+        $response=file_get_contents($url);
+        var_dump($response);
+    }
+<<<<<<< HEAD
     ///333
     public function getWxToken3(){
         $appid="wx1f21d2a459d9c0bb";
@@ -171,5 +189,25 @@ class TestController extends Controller
         curl_setopt($ch,CURLOPT_HTTPHEADER,$headers);   //header头部传参
         curl_exec($ch);
         curl_close($ch);
+=======
+    ///签名测试
+    public function sign2(){
+        //签名key
+        $key="111";
+        //接收数据
+        $data=\request()->get("data");
+        $sign=\request()->get("sign");
+        //计算签名
+        $sign_str2=md5($data.$key);
+        if($sign_str2==$sign){
+            echo "验签通过";
+        }else{
+            echo "验签失败";
+        }
+>>>>>>> 6d24dacb02748014c31917a89ad51a356ff16e9b
     }
 }
+
+
+
+

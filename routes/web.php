@@ -12,6 +12,7 @@
 */
 
 Route::get('/', function () {
+<<<<<<< HEAD
     return view('welcome');
 //    phpinfo();
 });
@@ -51,3 +52,21 @@ Route::get('/rsa21','TestController@rsa21');
 Route::get('/sign1','TestController@sign1');
 //header传参
 Route::get('/header1','TestController@header1');
+=======
+	 return view('welcome');
+});
+////
+Route::get('/test1','TestController@test1');
+Route::get('/test2','TestController@test2');
+
+////对称加密
+//解密
+Route::get('/dec2','TestController@dec2');
+////非对称加密
+//解密
+Route::get('/rsa2','TestController@rsa2');
+//加密
+Route::get('/rsa11','TestController@rsa11');
+//签名测试
+Route::get('/sign2','TestController@sign2');
+>>>>>>> 6d24dacb02748014c31917a89ad51a356ff16e9b
