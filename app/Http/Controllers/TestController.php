@@ -155,4 +155,21 @@ class TestController extends Controller
         $response=file_get_contents($url);
         echo $response;
     }
+    //////header传参
+    public function header1(){
+        $url="http://api.1911.com/header1";
+        $uid="123321";
+        $token=Str::random(16);
+        //header传参
+        $headers=[
+            "uid:".$uid,
+            "token:".$token
+        ];
+        //curl
+        $ch=curl_init();
+        curl_setopt($ch,CURLOPT_URL,$url);
+        curl_setopt($ch,CURLOPT_HTTPHEADER,$headers);   //header头部传参
+        curl_exec($ch);
+        curl_close($ch);
+    }
 }

@@ -12,8 +12,8 @@
 */
 
 Route::get('/', function () {
-//    return view('welcome');
-    phpinfo();
+    return view('welcome');
+//    phpinfo();
 });
 ////
 Route::get('/wx/token','TestController@getWxToken');
@@ -49,3 +49,5 @@ Route::get('/rsa1','TestController@rsa1');
 Route::get('/rsa21','TestController@rsa21');
 //签名测试
 Route::get('/sign1','TestController@sign1');
+//header传参
+Route::get('/header1','TestController@header1');
